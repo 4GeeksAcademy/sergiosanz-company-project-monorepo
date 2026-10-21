@@ -49,13 +49,13 @@ You are building **one company** across many milestones and projects. Each top-l
 
 ---
 
-## Current status of the template
+## Current project status
 
-> 💡 This repository currently provides a **base folder structure and documentation skeleton** only. It does not include runnable apps or global scripts yet.
->
-> - `CONTEXT.md` is a placeholder and must be replaced with your assigned company context.
-> - There is no root `AGENTS.md` yet.
-> - Shared package metadata exists in `packages/shared/package.json` (`@repo/shared-types`), but no workspace runner is configured at root.
+- The active business context is HealthCore; see [`CONTEXT.md`](./CONTEXT.md) and [`CONTEXT.es.md`](./CONTEXT.es.md).
+- The public website lives in `uis/website/` as static HTML and JavaScript. `services/` does not yet contain a runnable API.
+- `packages/shared/` contains TypeScript types and package metadata, but the root has no workspace runner or global test command.
+- Agent business and technical context lives in [`memory-bank/`](./memory-bank/); the global workflow is in [`AGENTS.md`](./AGENTS.md), with scoped rules and skills under `.agents/`.
+
 
 ---
 
