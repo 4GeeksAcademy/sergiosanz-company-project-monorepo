@@ -8,7 +8,7 @@ argument-hint: "Optional base ref, for example origin/main"
 
 ## Objetivo
 
-Aplicar una puerta de calidad repetible antes de confirmar cambios en este monorepo.
+Determinar y dejar evidencia de si los cambios staged están listos para un commit en este monorepo. Esta skill no crea commits ni hace push.
 
 ## Entradas
 
@@ -33,13 +33,13 @@ Aplicar una puerta de calidad repetible antes de confirmar cambios en este monor
 
 ## Salida
 
-Un resumen de los comandos ejecutados, sus resultados y cualquier requisito no verificado. La skill no crea commits ni hace push.
+Registra en la respuesta final los comandos ejecutados y su código de salida, la lista de archivos revisados, el resultado de la revisión de secretos/datos sensibles y cualquier comprobación no aplicable o pendiente.
 
 ## Criterios de aceptación
 
-- La rama actual no es `main` y la referencia base existe.
-- Hay al menos un archivo staged y el diff staged/unstaged no presenta errores detectados por `git diff --check`.
-- Las pruebas aplicables pasan; si el repo no define una prueba aplicable, esa ausencia y la comprobación manual quedan explícitas.
-- El diff revisado se limita a la tarea y no contiene secretos ni datos sanitarios identificables.
+- El comando `bash .agents/skills/precommit-validation/scripts/check.sh <base-ref>` termina con código `0` y muestra `PASS`. El script comprueba que la rama no sea `main`, que la referencia base exista, que haya archivos staged y que `git diff --check` no encuentre errores.
+- Cada prueba o comprobación automatizada aplicable termina con código `0`. Si no existe una prueba aplicable, el informe dice explícitamente que no hay comando configurado y enumera la comprobación alternativa realizada.
+- La salida de `git diff --cached --name-status` se revisa y contiene únicamente archivos previstos para la tarea; el informe registra esa lista.
+- Se revisa el contenido completo de `git diff --cached`; el informe confirma que no contiene secretos, credenciales ni datos identificables de pacientes, o detalla el bloqueo encontrado.
 
-Los dos primeros criterios son verificados automáticamente por [scripts/check.sh](./scripts/check.sh); los demás requieren revisar los resultados reales de las pruebas y el diff.
+El primer criterio es automatizado por [scripts/check.sh](./scripts/check.sh). Los restantes se verifican con los códigos de salida de las pruebas y la revisión documentada del diff; si no se puede completar cualquiera, no se debe recomendar el commit.

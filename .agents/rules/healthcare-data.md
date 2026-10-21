@@ -1,6 +1,8 @@
 # Regla: datos sanitarios y privacidad
 
-**Alcance:** aplicar a código, pruebas, documentación, logs, datasets y decisiones que puedan afectar a pacientes, empleados o datos sanitarios.
+**Ámbito de aplicación:** siempre activa en todo el monorepo.
+
+Aplica a código, pruebas, documentación, logs, datasets y decisiones que puedan afectar a pacientes, empleados o datos sanitarios.
 
 - No incluyas PHI/PII real, credenciales, tokens ni secretos en el repositorio, prompts, fixtures, capturas, ejemplos o logs. Usa datos sintéticos; anonimiza solo cuando esté autorizado y sea suficiente.
 - Minimiza los datos recogidos, mostrados, almacenados y enviados a servicios externos. No añadas telemetría de datos personales sin una justificación y revisión explícitas.

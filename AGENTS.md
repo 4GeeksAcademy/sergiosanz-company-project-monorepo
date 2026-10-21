@@ -4,23 +4,41 @@ Estas instrucciones aplican a todo el repositorio.
 
 ## Contexto obligatorio
 
-Antes de planificar o editar:
+Al inicio de cada sesión, antes de planificar o editar, lee los tres archivos del banco de memoria:
 
-1. Lee [`memory-bank/business-context.md`](./memory-bank/business-context.md) y [`memory-bank/technical-context.md`](./memory-bank/technical-context.md).
-2. Lee el `README` de la carpeta propietaria del cambio y las reglas de `.agents/rules/` que correspondan.
-3. Contrasta el contexto con el código y la documentación local. El banco de memoria orienta; no sustituye a las fuentes del proyecto.
+- [`memory-bank/projectbrief.md`](./memory-bank/projectbrief.md): negocio, objetivo del proyecto y problema.
+- [`memory-bank/techContext.md`](./memory-bank/techContext.md): stack, decisiones técnicas y restricciones.
+- [`memory-bank/progress.md`](./memory-bank/progress.md): estado actual y próximos pasos.
 
-Si una decisión, una arquitectura o el estado del producto cambia, actualiza el archivo de memoria afectado en el mismo cambio.
+Después, lee el `README` de la carpeta propietaria del cambio y las reglas de `.agents/rules/` que correspondan. Contrasta la memoria con el código y el briefing específico; la memoria no sustituye a las fuentes del proyecto. Actualiza `progress.md` cuando cambie el estado o los próximos pasos.
 
-## Flujo de trabajo
+## Flujo obligatorio antes de cada commit
 
-1. Identifica el resultado esperado y una comprobación concreta que pueda refutar la hipótesis de implementación.
-2. Revisa `git status` y la rama actual. Conserva los cambios preexistentes y trabaja en una rama de feature; no desarrolles directamente sobre `main`.
-3. Sigue la estructura existente: web pública en `uis/website/`, aplicación interna en `uis/backoffice/` y APIs en `services/`. Lee el README propietario antes de añadir archivos. No inventes una estructura paralela.
-4. Haz el cambio mínimo que cumpla el objetivo y mantén separadas las herramientas de desarrollo (`.agents/`) del producto (`agents/` y `skills/`).
-5. Ejecuta primero la prueba o comprobación más cercana al cambio. Después ejecuta las comprobaciones adicionales que exija la carpeta o el proyecto. Si no existe una prueba aplicable, indícalo; no declares una verificación que no se ejecutó.
-6. Antes de un commit, revisa el diff completo, comprueba que no haya secretos ni datos sanitarios identificables y ejecuta `git diff --check` junto con la skill `.agents/skills/precommit-validation/SKILL.md`.
-7. No hagas commit ni push salvo que el usuario lo haya pedido o autorizado. Cuando la tarea pida una PR, publica la rama y abre una PR hacia la rama base indicada; nunca hagas push directo a `main`.
+Sigue estos pasos en orden antes de cada commit:
+
+1. Ejecuta `git status` y confirma rama y cambios preexistentes; consérvalos y trabaja en una rama de feature, nunca directamente en `main`.
+2. Revisa el diff completo y la lista de archivos staged; confirma que cada archivo pertenece a la tarea y a su carpeta propietaria.
+3. Ejecuta las pruebas y comprobaciones relevantes del área, `git diff --check` y la skill `.agents/skills/precommit-validation/SKILL.md`. Si no existe una prueba aplicable, deja constancia y no afirmes que pasó.
+4. Comprueba que el diff no contiene secretos ni datos identificables de pacientes, y actualiza `progress.md` y el contexto afectado si cambió el estado del proyecto.
+5. Solo entonces crea el commit si el desarrollador lo pidió o autorizó explícitamente. No hagas push directo a `main`; si la tarea pide una PR, publica una rama de feature y abre la PR.
+
+## Rutas protegidas
+
+No modifiques las siguientes rutas sin confirmación explícita del desarrollador para esa modificación:
+
+- Briefings y contexto fuente: `healthcore-BRIEFING.es.md`, `CONTEXT.md` y `CONTEXT.es.md`.
+- Datos fuente: `data/raw/**`.
+- Infraestructura y despliegue: `infra/**` y `.github/workflows/**`.
+- Metadatos internos de Git: `.git/**`.
+- Cualquier archivo que contenga credenciales, tokens, claves privadas u otros secretos.
+
+Si una tarea parece requerir cambios protegidos pero no los autoriza de forma explícita, detente y pregunta antes de editar.
+
+## Ubicación del código de producto
+
+Este hito no pide crear aplicaciones nuevas. Cuando una tarea futura las solicite, usa `uis/website/` para la web pública, `uis/backoffice/` para la app interna independiente y `services/` para APIs/backend. Lee el README de cada carpeta antes de añadir código; no inventes un árbol paralelo.
+
+Mantén separadas las herramientas de desarrollo (`.agents/`) del producto (`agents/` y `skills/`).
 
 ## Límites
 
