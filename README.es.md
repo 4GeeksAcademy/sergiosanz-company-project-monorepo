@@ -49,13 +49,13 @@ Estás construyendo **una sola empresa** a lo largo de muchos hitos y proyectos.
 
 ---
 
-## Estado actual de la plantilla
+## Estado actual del proyecto
 
-> 💡 Actualmente el repositorio ofrece solo una **estructura base de carpetas y documentación**. Todavía no incluye aplicaciones ejecutables ni scripts globales en la raíz.
->
-> - `CONTEXT.md` es un placeholder y debe sustituirse por el contexto de la empresa asignada.
-> - No existe todavía un `AGENTS.md` en la raíz.
-> - Existe metadata del paquete compartido en `packages/shared/package.json` (`@repo/shared-types`), pero aún no hay runner de workspace en raíz.
+- El contexto de negocio activo es HealthCore; consulta [`CONTEXT.md`](./CONTEXT.md) y [`CONTEXT.es.md`](./CONTEXT.es.md).
+- La web pública está en `uis/website/` como HTML y JavaScript estáticos. `services/` todavía no contiene una API ejecutable.
+- `packages/shared/` tiene tipos TypeScript y metadata de paquete, pero la raíz no configura un runner de workspace ni un comando global de tests.
+- El contexto técnico y de negocio para agentes vive en [`memory-bank/`](./memory-bank/); el protocolo global está en [`AGENTS.md`](./AGENTS.md), con reglas y skills específicas en `.agents/`.
+
 
 ---
 

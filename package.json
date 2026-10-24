@@ -1,0 +1,7 @@
+{
+  "name": "healthcore-website",
+  "private": true,
+  "scripts": {
+    "start": "npx --yes serve uis/website -l 3000"
+  }
+}
